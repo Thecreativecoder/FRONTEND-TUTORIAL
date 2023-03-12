@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Form</title>
+	<style>
+		.error {
+			color: red;
+			font-weight: bold;
+		}
+		.success {
+			color: green;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h2>My Form</h2>
+	<form method="post" action="#" onsubmit="return validateForm()">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required><br><br>
+		
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" required><br><br>
+		
+		<label for="phone">Phone:</label>
+		<input type="tel" id="phone" name="phone" required><br><br>
+		
+		<label for="gender">Gender:</label>
+		<input type="radio" id="male" name="gender" value="male" required>
+		<label for="male">Male</label>
+		<input type="radio" id="female" name="gender" value="female" required>
+		<label for="female">Female</label><br><br>
+		
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" required><br><br>
+		
+		<input type="submit" value="Submit">
+	</form>
+	
+	<div id="error-message" class="error" style="display:none">Please fill in all the required fields.</div>
+	<div id="email-error" class="error" style="display:none">Please enter a valid email address.</div>
+	<div id="success-message" class="success" style="display:none">Form submitted successfully!</div>
+	
+	<script>
+		function validateForm() {
+			var name = document.forms[0]["name"].value;
+			var email = document.forms[0]["email"].value;
+			var phone = document.forms[0]["phone"].value;
+			var password = document.forms[0]["password"].value;
+			var error = false;
+			
+			if (name == "" || email == "" || phone == "" || password == "") {
+				document.getElementById("error-message").style.display = "block";
+				error = true;
+			}
+			
+			var emailRegex = /^\S+@\S+\.\S+$/;
+			if (!emailRegex.test(email)) {
+				document.getElementById("email-error").style.display = "block";
+				error = true;
+			}
+			
+			if (error) {
+				return false;
+			}
+			
+			document.getElementById("success-message").style.display = "block";
+			return true;
+		}
+	</script>
+</body>
+</html>
